@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Message>
+
+@{
+    ViewBag.Title = "Список писем";
+}
+
+<table class="table table-bordered table-striped table-sm">
+    <tr class="table-primary">
+        <td class="text-center">Действие</td>
+        <td class="text-center">Название</td>
+        <td class="text-center">Время</td>
+        <td class="text-center">Получатель</td>
+        <td class="text-center">Отправитель</td>
+        <td class="text-center">Важность</td>
+    </tr>
+    @{
+        foreach (Message message in Model)
+        {
+            <tr>
+                <td class="text-center">
+                    <a class="btn btn-info btn-sm" asp-action="Message" asp-route-message_id="@message.ID" asp-route-tags_count="@message.Tags.Count()">Открыть</a>
+                </td>
+                <td>@message.Title</td>
+                <td>@message.DateTime</td>
+                <td>@message.Recipient</td>
+                <td>@message.Sender.Address</td>
+                <td>@message.Important</td>
+            </tr>
+
+        }
+    }
+</table>

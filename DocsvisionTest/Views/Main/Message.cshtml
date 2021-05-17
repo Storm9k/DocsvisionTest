@@ -1,0 +1,46 @@
+﻿@model Message
+
+@{
+    ViewBag.Title = "Просмотр и редактирование письма";
+}
+
+<div>
+    <form asp-action="Message" method="post">
+        <input type="hidden" asp-for="ID" />
+        <div class="form-group row" >
+            <label class="col" asp-for="Title">Название письма</label>
+            <input asp-for="Title" class="form-control" />
+        </div>
+        <div class="form-group row">
+            <label asp-for="DateTime">Дата и время</label>
+            <input asp-for="DateTime" class="form-control" readonly/>
+        </div>
+        <div class="form-group row">
+            <label asp-for="Recipient">Получатель</label>
+            <input asp-for="Recipient" class="form-control" readonly/>
+        </div>
+        <div class="form-group row">
+            <label asp-for="Sender.Address">Отправитель</label>
+            <input asp-for="Sender.Address" class="form-control" readonly/>
+        </div>
+        <div class="form-group row">
+            <label asp-for="Content">Содержание</label>
+            <textarea asp-for="Content" class="form-control"></textarea>
+        </div>
+        <div class="form-group form-check">
+            <input asp-for="Important" class="form-check-input" />
+            <label asp-for="Important" class="form-check-label">Важность</label>
+        </div>
+        <div class="form-group row">
+            <label asp-for="Tags">Тэги</label>
+            @for(int i = 0; i < ViewBag.TagsCount; i++)
+            {
+                <input asp-for="@Model.Tags.ElementAt(i).TagName" class="form-control m-1" readonly/>
+            }
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary" type="submit">Сохранить изменения</button>
+            <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+        </div>
+    </form>
+</div>

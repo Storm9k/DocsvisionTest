@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Sender>
+
+@{
+    ViewBag.Title = "Главная страница";
+}
+
+<div>
+
+    <a asp-action="MessageList" asp-route-sender_id="0" class="btn btn-link btn-sm">Просмотр всех писем</a>
+
+    <table class="table table-bordered table-sm table-striped">
+        <tr class="table-primary">
+            <td class="text-center">Действие</td>
+            <td class="text-center">Имя</td>
+            <td class="text-center">Фамилия</td>
+            <td class="text-center">Email адрес</td>
+        </tr>
+        @{
+            foreach (Sender sender in Model)
+            {
+                <tr>
+                    <td class="text-center">
+                        <a asp-action="MessageList" class="btn btn-sm btn-info" asp-route-sender_id="@sender.ID">Просмотр</a>
+                    </td>
+                    <td>@sender.Firstname</td>
+                    <td>@sender.Lastname</td>
+                    <td>@sender.Address</td>
+                </tr>
+                
+            }
+        }
+    </table>
+</div>
